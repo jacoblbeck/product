@@ -128,12 +128,15 @@ int dump_buffer(char *buffer, unsigned int bufsize,
 				keyindex++;
 			}
 		}
-		else {
+		else if(mode == 1) {
 			for (int i = 0; i < bytes; i++){
-				buffer[i] = ((buffer[i] - *keyindex) % 256);
+				cipher = ((buffer[i] - *keyindex) % 256);
+				buffer[i] = cipher;
 				keyindex++;
 			}
+
 		}
+		else exit(1);
 	}
 
 	int unpad_buffer(char *buffer, unsigned int bufsize) {
@@ -303,30 +306,27 @@ int dump_buffer(char *buffer, unsigned int bufsize,
 
 		if(MODE == DECODE) {
 			mode = 1;
-			int return_size;
+			int return_size = 0;
 			for(int i = 0; i < filesize; i++) {
 				fread(&symbol, 1, 1, INPUT);
 				if(rbuf_index == bufsize) {
 					for(int i = 0; i < rounds; i++){
-					transpose_buffer(write_buf, read_buf, dim);
-					vigenere_buffer(write_buf,key,bufsize,mode);
+						transpose_buffer(write_buf, read_buf, dim);
+						vigenere_buffer(read_buf,key,bufsize,mode);
 					}
-					dump_buffer(write_buf, bufsize, bufsize, OUTPUT);
+					dump_buffer(read_buf, bufsize, bufsize, OUTPUT);
 					rbuf_index = 0;
 				}
 				read_buf[rbuf_index] = symbol;
 				rbuf_index++;
 				bytesleft--;
 			}
-			if(rbuf_index > 0)
-			{
 				for(int i = 0; i < rounds; i++){
-				transpose_buffer(write_buf, read_buf, dim);
-				vigenere_buffer(write_buf,key, bufsize, mode);
-			}
-				return_size = unpad_buffer(write_buf, bufsize);
-				dump_buffer(write_buf, bufsize, bufsize - return_size, OUTPUT);
-			}
+					transpose_buffer(write_buf, read_buf, dim);
+					vigenere_buffer(read_buf,key, bufsize, mode);
+				}
+				return_size = unpad_buffer(read_buf, bufsize);
+				dump_buffer(read_buf, bufsize, bufsize - return_size, OUTPUT);
 
 		}
 
