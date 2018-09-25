@@ -128,13 +128,12 @@ int dump_buffer(char *buffer, unsigned int bufsize,
 				keyindex++;
 			}
 		}
-		else if(mode == 1) {
+		else if (mode == 1) {
 			for (int i = 0; i < bytes; i++){
 				cipher = ((buffer[i] - *keyindex) % 256);
 				buffer[i] = cipher;
 				keyindex++;
 			}
-
 		}
 		else exit(1);
 	}

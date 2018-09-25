@@ -1,0 +1,12 @@
+Question 1: The plaintext is much easier to compress because there is much more redundancy within the file so it is much easier to make smaller. While with the encrypted versions there is little to no redundancy so the file doesn’t get much smaller or even grows. 
+
+Question 2: The file is larger because there is no redundancy within the file. So when you tried to compress the file it actually grew because it added more data to file while trying to compress. This tells us the entropy on the AES algorithm is much higher than the entropy on our product cipher. 
+
+Question 3: The encrypted files don’t matter on they key they are all the same file size. This is the same because with columnar and vigenere you are just moving stuff around or shifting values so you aren’t actually expanding or decreasing the file size you are just moving bytes.  
+
+
+Question 4: There is a slight difference in file size when compressing with different keys. But it is a very slight difference so I would say no it doesn’t matter what key you use that it doesn’t change the size of the compression file. I think that because of the way columnar and vigenere both work they are very simple ciphertexts so they wouldn’t be changing the file all that much that would help remove the redundancy making it harder to compress. 
+
+Question 5: The files do differ in ratio. Abe file has a .99 ratio and moby dick has a .79 ratio. I think this differs because moby dick is a much larger file to begin with so there is more chance for redundancy and with the way we are encrypting our files there is a high chance for repetition therefore creating a smaller ratio and having a smaller encrypted file. 
+
+
