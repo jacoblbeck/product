@@ -123,14 +123,14 @@ int dump_buffer(char *buffer, unsigned int bufsize,
 		char cipher;
 		if(mode == 0){
 			for (int i = 0; i < bytes; i++){
-				cipher = ((buffer[i] + *keyindex) % 256);
+				cipher = ((buffer[i] + keybuf[i]) % 256);
 				buffer[i] = cipher;
 				keyindex++;
 			}
 		}
 		else if (mode == 1) {
 			for (int i = 0; i < bytes; i++){
-				cipher = ((buffer[i] - *keyindex) % 256);
+				cipher = ((buffer[i] - keybuf[i]) % 256);
 				buffer[i] = cipher;
 				keyindex++;
 			}
